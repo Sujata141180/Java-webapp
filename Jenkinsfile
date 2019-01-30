@@ -25,7 +25,7 @@ node{
 
    // stage('Upload to Nexus'){
      // nexusPublisher nexusInstanceId: '12345', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/my-webapp.war']], mavenCoordinate: [artifactId: 'my-webapp', groupId: 'com.mycompany.app', packaging: 'war', version: '$ProjectVersion']]]
-    }
+    //}
     stage('Deploy to tomcat'){
         sh 'sudo cp target/*.war /var/lib/tomcat8/webapps'
         
