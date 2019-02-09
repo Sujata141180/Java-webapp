@@ -1,3 +1,4 @@
+
 node{
     stage("Checkout SCM"){
         
@@ -30,6 +31,9 @@ node{
  stage("Nexus Artifacts publish"){
         nexusPublisher nexusInstanceId: '12345', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/my-webapp.war']], mavenCoordinate: [artifactId: 'my-webapp', groupId: 'com.mycompany.app', packaging: 'war',, version: '1.3']]]
             
+    }
+    stage("mytest"){
+    echo "Heloo from mytest"
     }
 }
 
