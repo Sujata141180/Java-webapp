@@ -1,4 +1,5 @@
 
+
 node{
     stage("Checkout SCM"){
         
@@ -11,6 +12,7 @@ node{
     }
     stage("Test"){
         sh "mvn test"
+        sh "askjd"
     }
     
     stage("Sonar Analysis"){
