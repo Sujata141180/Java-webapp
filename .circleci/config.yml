@@ -18,7 +18,20 @@ jobs:
           command: ls -ltrh
       - run:
           command: dir 
-     
+  test3:
+    working_directory: ~/test
+    environment:
+      NODE_ENV: "circle"
+    docker:
+      - image: circleci/node:10.16.3-stretch
+    steps:
+      - checkout
+      - run:
+          command: cd src/main/webapp/
+      - run:
+          command: ls
+      
+  
         
 workflows:
   # Name the workflow "welcome"
@@ -31,6 +44,6 @@ workflows:
       - test2:
           requires: 
             - test1
-         
-  
-
+      - test3:
+          requires:
+            - test2
