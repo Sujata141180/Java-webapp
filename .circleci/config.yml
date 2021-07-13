@@ -27,9 +27,9 @@ jobs:
     steps:
       - checkout
       - run:
-          command: cd src/main/webapp/
-      - run:
-          command: ls
+          command: |
+            cd src/main/webapp/ 
+            ls
       
   
         
