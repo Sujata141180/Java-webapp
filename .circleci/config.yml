@@ -7,7 +7,7 @@ orbs:
 # Orchestrate or schedule a set of jobs
 jobs:
   test1:
-    working_directory: ~/
+    working_directory: ~/test
     environment:
       NODE_ENV: "circle"
     docker:
