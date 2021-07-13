@@ -7,9 +7,14 @@ orbs:
 # Orchestrate or schedule a set of jobs
 jobs:
   test1:
+    working_directory: ~/
+    environment:
+      NODE_ENV: "circle"
+    docker:
+      - image: circleci/node:10.16.3-stretch
     steps:
       - run:
-          command: dir
+          command: ls
 workflows:
   # Name the workflow "welcome"
   welcome:
