@@ -30,6 +30,19 @@ jobs:
           command: |
             cd src/main/webapp/ 
             ls
+  test4:
+    working_directory: ~/test
+    environment:
+      NODE_ENV: "circle"
+    docker:
+      - image: circleci/node:10.16.3-stretch
+    steps:
+      - checkout
+      - run:
+          command: |
+            cd src/main/webapp/ 
+            ls
+            echo "Hello from test4"
       
   
         
@@ -47,3 +60,4 @@ workflows:
       - test3:
           requires:
             - test2
+      - test4
