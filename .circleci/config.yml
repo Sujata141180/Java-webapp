@@ -13,6 +13,9 @@ jobs:
     docker:
       - image: circleci/node:10.16.3-stretch
     steps:
+      - checkout
+      - run:
+          command: ls -ltrh
       - run:
           command: dir 
 workflows:
