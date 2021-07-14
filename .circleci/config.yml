@@ -54,6 +54,7 @@ jobs:
     steps:
       - checkout
       - run: mvn integration-test    
+      - run: mvn build
   
         
 workflows:
