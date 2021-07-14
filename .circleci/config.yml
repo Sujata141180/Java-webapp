@@ -53,17 +53,17 @@ workflows:
   maven_test:
     jobs:
       - maven/test:
-          command: '-X verify'
-  welcome:
+          command: 'mvn test'
+  #welcome:
     # Run the welcome/run job in its own container
-    jobs:
+    #jobs:
      # - welcome/run
-      - test1:
-          type: approval
-      - test2:
-          requires: 
-            - test1
-      - test3:
-          requires:
-            - test2
-      - test4
+     # - test1:
+      #    type: approval
+      #- test2:
+       #   requires: 
+        #    - test1
+     # - test3:
+    #      requires:
+   #         - test2
+  #    - test4
