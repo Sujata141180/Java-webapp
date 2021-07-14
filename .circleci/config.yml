@@ -52,8 +52,8 @@ workflows:
   # Name the workflow "welcome"
   maven_test:
     jobs:
-      - maven/test:
-          command: 'mvn test'
+      - maven/test
+          
   #welcome:
     # Run the welcome/run job in its own container
     #jobs:
