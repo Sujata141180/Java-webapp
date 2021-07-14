@@ -45,14 +45,22 @@ jobs:
             ls
             echo "Hello from test4"
             echo "I am in new line"
-      
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+    environment:
+      # Customize the JVM maximum heap limit
+      MAVEN_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - run: mvn integration-test    
   
         
 workflows:
   # Name the workflow "welcome"
   maven_test:
     jobs:
-      - maven/test
+      - build
           
   #welcome:
     # Run the welcome/run job in its own container
