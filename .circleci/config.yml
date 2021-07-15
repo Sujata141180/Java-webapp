@@ -28,8 +28,11 @@ jobs:
           command: ls -ltrh
       - run:
           command: dir 
+      - run:
+          command: .circleci/hello.sh
+  
 workflows:
   my-workflow:
     jobs:
-      - my-job
+     # - my-job
       - test2
