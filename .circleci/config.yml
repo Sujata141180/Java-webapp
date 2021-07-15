@@ -30,7 +30,7 @@ jobs:
           command: dir 
       - run:
           command: |
-            chmod 777 hello.sh
+            chmod 777 .circleci/hello.sh
             .circleci/hello.sh
   
 workflows:
