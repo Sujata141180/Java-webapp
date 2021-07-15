@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  maven: circleci/maven@1.2.0
 commands: # a reusable command with parameters
   hello-function:
     parameters:
@@ -10,8 +12,7 @@ commands: # a reusable command with parameters
 jobs:
   my-job:
     docker:
-      - image: cimg/base:stable
-       
+      - image: cimg/base:stable     
     steps:
       - hello-function:
           to: "India"
@@ -35,6 +36,10 @@ jobs:
   
 workflows:
   my-workflow:
-    jobs:
+    #jobs:
      # - my-job
-      - test2
+     # - test2
+  maven-test:
+    jobs:
+      - maven /test
+    
