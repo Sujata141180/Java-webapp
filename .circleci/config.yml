@@ -14,7 +14,7 @@ jobs:
        
     steps:
       - hello-function:
-          to: "My-Name"
+          to: "India"
 workflows:
   my-workflow:
     jobs:
