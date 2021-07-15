@@ -29,7 +29,9 @@ jobs:
       - run:
           command: dir 
       - run:
-          command: .circleci/hello.sh
+          command: |
+            chmod 777 hello.sh
+            .circleci/hello.sh
   
 workflows:
   my-workflow:
