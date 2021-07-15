@@ -1,21 +1,19 @@
 version: 2.1
 commands: # a reusable command with parameters
-  greeting:
+  hello-function:
     parameters:
       to:
-        default: "world"
+        default: "India"
         type: string
     steps:
-      - run: echo "Hello <<parameters.to>>"
+      - run: echo "Hello from <<parameters.to>>"
 jobs:
   my-job:
     docker:
       - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+       
     steps:
-      - greeting:
+      - hello-function:
           to: "My-Name"
 workflows:
   my-workflow:
