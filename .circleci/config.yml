@@ -1,7 +1,4 @@
 version: 2.1
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
 commands: # a reusable command with parameters
   hello-function:
     parameters:
@@ -18,7 +15,21 @@ jobs:
     steps:
       - hello-function:
           to: "India"
+  
+  test2:
+    working_directory: ~/test
+    environment:
+      NODE_ENV: "circle"
+    docker:
+      - image: circleci/node:10.16.3-stretch
+    steps:
+      - checkout
+      - run:
+          command: ls -ltrh
+      - run:
+          command: dir 
 workflows:
   my-workflow:
     jobs:
       - my-job
+      - test2
