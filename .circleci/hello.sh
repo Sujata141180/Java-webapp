@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "Hello from shell"
+sudo echo "Hello from shell"
