@@ -33,13 +33,29 @@ jobs:
           command: |
             chmod 777 .circleci/hello.sh
             .circleci/hello.sh
-  
+  maven-test:
+    working_directory: ~/test
+    environment:
+      NODE_ENV: "circle"
+    docker:
+      - image: cimg/openjdk:11.0
+    steps:
+      # Checkout the code as the first step.
+      - checkout
+      # Use mvn clean and package as the standard maven build phase
+      - run:
+          name: Build
+          command: mvn -B -DskipTests clean package
+      # Then run your tests!
+      - run:
+          name: Test
+          command: mvn test
 workflows:
-  my-workflow:
-    jobs:
-     - my-job
-     - test2
+  #my-workflow:
+   # jobs:
+     #- my-job
+     #- test2
   maven-test:
     jobs:
-      - maven/test
+      - maven-test
     
