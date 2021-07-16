@@ -35,10 +35,10 @@ jobs:
             .circleci/hello.sh
   
 workflows:
-  #my-workflow:
-    #jobs:
-     # - my-job
-     # - test2
+  my-workflow:
+    jobs:
+     - my-job
+     - test2
   maven-test:
     jobs:
       - maven/test
