@@ -8,7 +8,7 @@ commands: # a reusable command with parameters
         default: "India"
         type: string
     steps:
-      - run: echo "Hello from <<parameters.to>>"
+      - run: echo "Hello again from <<parameters.to>>"
 jobs:
   my-job:
     docker:
