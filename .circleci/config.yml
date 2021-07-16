@@ -51,10 +51,13 @@ jobs:
           name: Test
           command: mvn test
 workflows:
-  #my-workflow:
-   # jobs:
-     #- my-job
-     #- test2
+  my-workflow:
+    jobs:
+     - my-job:
+        type: approval
+     - test2:
+        requires:
+          - my-job
   maven-test:
     jobs:
       - maven-test
