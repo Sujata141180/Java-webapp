@@ -72,18 +72,20 @@ jobs:
       - run:
           name: Test
           command: mvn test
+      - store_artifacts:
+          path : /home/circleci/test/target/my-webapp.war
 workflows:
   artifact-test:
     jobs:
       - build
-  #my-workflow:
-    #jobs:
-     #- my-job:
-      #  type: approval
-     #- test2:
-      #  requires:
-       #   - my-job
-  #maven-test:
-   # jobs:
-    #  - maven-test
+  my-workflow:
+    jobs:
+     - my-job:
+        type: approval
+     - test2:
+        requires:
+          - my-job
+  maven-test:
+    jobs:
+      - maven-test
     
