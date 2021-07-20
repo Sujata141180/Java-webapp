@@ -87,6 +87,7 @@ jobs:
       # Use mvn clean and package as the standard maven build phase
       - run:
           command: |
+            chmod 777 .circleci/docker-build-image.sh
             .circleci/docker-build-image.sh
      
     
