@@ -93,6 +93,12 @@ jobs:
           command: mvn test
       - store_artifacts:
           path : /home/circleci/test/target/my-webapp.war
+      - run:
+          command: |
+            mkdir .circleci/target
+            cd /home/circleci/test/target/
+            cp my-webapp.war .circleci/target/
+
       # Use mvn clean and package as the standard maven build phase
       - setup_remote_docker
       - run:
