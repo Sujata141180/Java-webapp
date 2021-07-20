@@ -84,6 +84,15 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - run:
+          name: Build
+          command: mvn -B -DskipTests clean package
+      # Then run your tests!
+      - run:
+          name: Test
+          command: mvn test
+      - store_artifacts:
+          path : /home/circleci/test/target/my-webapp.war
       # Use mvn clean and package as the standard maven build phase
       - setup_remote_docker
       - run:
@@ -109,7 +118,6 @@ workflows:
     jobs:
       - maven-test:
           type: approval
-      - push-image:
-          requires: 
-            - maven-test
+      - push-image
+          
     
