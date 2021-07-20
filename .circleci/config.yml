@@ -85,6 +85,7 @@ jobs:
       # Checkout the code as the first step.
       - checkout
       # Use mvn clean and package as the standard maven build phase
+      - setup_remote_docker
       - run:
           command: |
             chmod 777 .circleci/docker-build-image.sh
