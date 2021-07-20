@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   maven: circleci/maven@1.1
+  browser-tools: circleci/browser-tools@1.0.1
 commands: # a reusable command with parameters
   hello-function:
     parameters:
@@ -74,10 +75,27 @@ jobs:
           command: mvn test
       - store_artifacts:
           path : /home/circleci/test/target/my-webapp.war
+  push-image:
+    working_directory: ~/test
+    environment:
+        NODE_ENV: "circle"
+    docker:
+      - image: cimg/openjdk:11.0
+    steps:
+      # Checkout the code as the first step.
+      - checkout
+      # Use mvn clean and package as the standard maven build phase
+      - run:
+          command: |
+            .circleci/docker-build-image.sh
+     
+    
+
 workflows:
   artifact-test:
     jobs:
-      - build
+      - build:
+          type: approval
   my-workflow:
     jobs:
      - my-job:
@@ -87,5 +105,9 @@ workflows:
           - my-job
   maven-test:
     jobs:
-      - maven-test
+      - maven-test:
+          type: approval
+      - push-image:
+          requires: 
+            - maven-test
     
