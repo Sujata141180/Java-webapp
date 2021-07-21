@@ -96,7 +96,7 @@ jobs:
       - run: mkdir -p .circleci/target;
       - run:
           command |
-            cp /home/circleci/test/target/my-webapp.war /.circleci/target/
+            cp /home/circleci/test/target/my-webapp.war .circleci/target/my-webapp.war
 
       # Use mvn clean and package as the standard maven build phase
       - setup_remote_docker
