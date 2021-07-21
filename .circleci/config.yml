@@ -93,7 +93,7 @@ jobs:
           command: mvn test
       - store_artifacts:
           path : /home/circleci/test/target/my-webapp.war
-      - run: mkdir .circleci/target/
+      - run: mkdir -p .circleci/target/
       - run:
           command |
             cp /home/circleci/test/target/my-webapp.war .circleci/target/
