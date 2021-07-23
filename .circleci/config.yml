@@ -129,8 +129,8 @@ jobs:
       - checkout
       - run: 
           command: |
-           cx_user = ${<<parameters.cx_user>>}
-           cx_password = ${<<parameters.cx_password>>}
+           cx_user = ${<< parameters.cx_user >>}
+           cx_password = ${<< parameters.cx_password >>}
            echo "Branch is ${CIRCLE_BRANCH}"
            echo "Branch is again $CIRCLE_BRANCH "
            echo "My env variables are ${MY_ENV_VAR}"
