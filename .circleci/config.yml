@@ -1,187 +1,22 @@
 version: 2.1
-orbs:
-  maven: circleci/maven@1.1
-  browser-tools: circleci/browser-tools@1.0.1
-commands: # a reusable command with parameters
-  hello-function:
-    parameters:
-      to:
-        default: "India"
-        type: string
-    steps:
-      - run: echo "Hello again from <<parameters.to>>"
+parameters:
+  image-tag:
+    type: string
+    default: "latest"
+  workingdir:
+    type: string
+    default: "~/main"
+
 jobs:
   build:
     docker:
-      - image: python:3.6.3-jessie
+      - image: circleci/node:<< pipeline.parameters.image-tag >>
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
-    working_directory: /tmp
-    steps:
-      - run:
-          name: Creating Dummy Artifacts
-          command: |
-            echo "my artifact file" > /tmp/artifact-1;
-            mkdir /tmp/artifacts;
-            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
-
-      - store_artifacts:
-          path: /tmp/artifact-1
-          destination: artifact-file
-
-      - store_artifacts:
-          path: /tmp/artifacts
-  my-job:
-    docker:
-      - image: cimg/base:stable     
-    steps:
-      - hello-function:
-          to: "India"
-  
-  test2:
-    working_directory: ~/test
     environment:
-      NODE_ENV: "circle"
-    docker:
-      - image: circleci/node:10.16.3-stretch
+      IMAGETAG: << pipeline.parameters.image-tag >>
+    working_directory: << pipeline.parameters.workingdir >>
     steps:
-      - checkout
-      - run:
-          command: ls -ltrh
-      - run:
-          command: dir 
-      - run:
-          command: |
-            chmod 777 .circleci/hello.sh
-            .circleci/hello.sh
-  maven-test:
-    working_directory: ~/test
-    environment:
-      NODE_ENV: "circle"
-    docker:
-      - image: cimg/openjdk:11.0
-    steps:
-      # Checkout the code as the first step.
-      - checkout
-      # Use mvn clean and package as the standard maven build phase
-      - run:
-          name: Build
-          command: mvn -B -DskipTests clean package
-      # Then run your tests!
-      - run:
-          name: Test
-          command: mvn test
-      - store_artifacts:
-          path : /home/circleci/test/target/my-webapp.war
-  push-image:
-    working_directory: ~/test
-    environment:
-        NODE_ENV: "circle"
-    docker:
-      - image: cimg/openjdk:11.0
-    steps:
-      # Checkout the code as the first step.
-      - checkout
-      - run:
-          name: Build
-          command: mvn -B -DskipTests clean package
-      # Then run your tests!
-      - run:
-          name: Test
-          command: mvn test
-      - store_artifacts:
-          path : /home/circleci/test/target/my-webapp.war
-      - run: mkdir -p .circleci/target;
-      - run:
-          command |
-            cp /home/circleci/test/target/my-webapp.war .circleci/target/my-webapp.war
-
-      # Use mvn clean and package as the standard maven build phase
-      - setup_remote_docker
-      - run:
-          command: |
-            chmod 777 .circleci/docker-build-image.sh
-            .circleci/docker-build-image.sh
-     
-  chckmarx-testing:
-    docker:
-      - image: circleci/python:3.9.0
-        
-
-    parameters:
-       cx_project_ID:
-        type: integer
-        default: 146
-       cx_url:
-        type: string
-        default: https://kone.checkmarx.net
-       cx_user1: 
-          type: string
-          default: "KoneCareContract_CI2"
-       cx_password1:
-          type: string 
-          default: z5lcQ1rXYaF95H6BMq\@\(2
-   
-    steps:
-      - run: pip3 install requests
-      - checkout
-      - run: 
-          command: |
-           
-           echo "Branch is ${CIRCLE_BRANCH}"
-           echo "Branch is again $CIRCLE_BRANCH "
-           echo "My env variables are ${MY_ENV_VAR}"
-           echo "My project env variables are $PROJECT_ENV_VAR"
-           echo " env user id is $cx_user "
-           echo "env password is $cx_password "
-           echo "Project id is <<parameters.cx_project_ID>>"
-           echo "URL is <<parameters.cx_url>>"
-           echo "username is <<parameters.cx_user1>>"
-           echo "password is <<parameters.cx_password1>>"
-           echo "This is Sujata Testing here"
-           echo "import os" >>test.py
-           echo "print(os.environ)" >>test.py
-           python3 test.py
-
-           
-              
-         
-      #     cx_pass=${cx_password}
-      # - run: pwd
-      # - run: echo $cx_user
-      # - run: ls -lart .circleci/scripts/CheckmarxScanner.py
-      # - run: python3 .circleci/scripts/CheckmarxScanner.py --username=KoneCareContract_CI --password=z5lcQ1rXYaF95H6BMq\@\( --url=<< parameters.cx_url >> --projectId=<< parameters.cx_project_ID >> --source=.
-
-  
-
-workflows:
-  artifact-test:
-    jobs:
-      - build:
-          type: approval
-  my-workflow:
-    jobs:
-     - my-job:
-        type: approval
-     - test2:
-        requires:
-          - my-job
-  maven-test:
-    jobs:
-      - maven-test:
-          type: approval
-      - push-image: 
-          requires:
-            - maven-test
-
-  checkmarx:
-    jobs:
-    - checkmarx_approval:
-       type: approval
-    - chckmarx-testing: 
-        requires:
-          - checkmarx_approval
-        
-    
+      - run: echo "Image tag used was ${IMAGETAG}"
+      - run: echo "$(pwd) == << pipeline.parameters.workingdir >>"
