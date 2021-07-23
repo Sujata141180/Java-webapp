@@ -130,6 +130,10 @@ jobs:
       - run: 
           command: |
            
+           echo "Branch is ${CIRCLE_BRANCH}"
+           echo $CIRCLE_BRANCH
+           echo ${MY_ENV_VAR}
+           echo ${PROJECT_ENV_VAR}
            echo "Project id is <<parameters.cx_project_ID>>"
            echo "URL is <<parameters.cx_url>>"
            echo "username is <<parameters.cx_user>>"
