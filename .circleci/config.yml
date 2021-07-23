@@ -117,15 +117,13 @@ jobs:
        cx_url:
         type: string
         default: https://kone.checkmarx.net
-      #  cx_user: 
-      #    type: string
-      #    default: "KoneCareContract_CI"
-      #  cx_pass:
-      #    type: string
-      #    default: z5lcQ1rXYaF95H6BMq\@\(
-    # environment:
-    #   cx_user: cx_user
-    #   cx_password: cx_password
+       cx_user: 
+          type: string
+          default: "KoneCareContract_CI"
+       cx_password:
+          type: string 
+          default: z5lcQ1rXYaF95H6BMq\@\(
+   
     steps:
       - run: pip3 install requests
       - checkout
@@ -134,8 +132,8 @@ jobs:
            
            echo "Project id is <<parameters.cx_project_ID>>"
            echo "URL is <<parameters.cx_url>>"
-           echo "username is ${cx_user}"
-           echo "password is ${cx_password}"
+           echo "username is <<parameters.cx_user>>"
+           echo "password is <<parameters.cx_password>>"
            echo "This is Sujata Testing here"
            echo "import os" >>test.py
            echo "print(os.environ)" >>test.py
