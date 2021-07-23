@@ -119,10 +119,10 @@ jobs:
         default: https://kone.checkmarx.net
        cx_user: 
           type: string
-          default: "sujata"
+          default: "KoneCareContract_CI"
        cx_password:
           type: string 
-          default: "sujata"
+          default: z5lcQ1rXYaF95H6BMq\@\(
     environment:
         cx_user: ${ << parameters.cx_user>> }
         cx_password: ${ << parameters.cx_password>> }
