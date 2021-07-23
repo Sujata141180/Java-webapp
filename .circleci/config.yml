@@ -117,10 +117,10 @@ jobs:
        cx_url:
         type: string
         default: https://kone.checkmarx.net
-       cx_user: 
+       cx_user1: 
           type: string
           default: "KoneCareContract_CI"
-       cx_password:
+       cx_password1:
           type: string 
           default: z5lcQ1rXYaF95H6BMq\@\(
    
@@ -131,15 +131,15 @@ jobs:
           command: |
            
            echo "Branch is ${CIRCLE_BRANCH}"
-           echo $CIRCLE_BRANCH
-           echo ${MY_ENV_VAR}
-           echo $PROJECT_ENV_VAR
-           echo $cx_user
-           echo $cx_password
+           echo "Branch is again $CIRCLE_BRANCH "
+           echo "My env variables are ${MY_ENV_VAR}"
+           echo "My project env variables are $PROJECT_ENV_VAR"
+           echo " env user id is $cx_user "
+           echo "env password is $cx_password "
            echo "Project id is <<parameters.cx_project_ID>>"
            echo "URL is <<parameters.cx_url>>"
-           echo "username is <<parameters.cx_user>>"
-           echo "password is <<parameters.cx_password>>"
+           echo "username is <<parameters.cx_user1>>"
+           echo "password is <<parameters.cx_password1>>"
            echo "This is Sujata Testing here"
            echo "import os" >>test.py
            echo "print(os.environ)" >>test.py
