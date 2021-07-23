@@ -119,10 +119,10 @@ jobs:
         default: https://kone.checkmarx.net
        cx_user1: 
           type: string
-          default: "KoneCareContract_CI"
+          default: "KoneCareContract_CI2"
        cx_password1:
           type: string 
-          default: z5lcQ1rXYaF95H6BMq\@\(
+          default: z5lcQ1rXYaF95H6BMq\@\(2
    
     steps:
       - run: pip3 install requests
