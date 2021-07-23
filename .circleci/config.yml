@@ -132,6 +132,8 @@ jobs:
       - run: 
           command: |
            
+           echo ${cx_project_ID}
+           echo ${cx_url}
            echo "This is Sujata Testing here"
            echo "import os" >>test.py
            echo "print(os.environ)" >>test.py
