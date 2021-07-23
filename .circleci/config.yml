@@ -105,7 +105,48 @@ jobs:
             chmod 777 .circleci/docker-build-image.sh
             .circleci/docker-build-image.sh
      
-    
+  chckmarx-testing:
+    docker:
+      - image: circleci/python:3.9.0
+        
+
+    parameters:
+       cx_project_ID:
+        type: integer
+        default: 146
+       cx_url:
+        type: string
+        default: https://kone.checkmarx.net
+      #  cx_user: 
+      #    type: string
+      #    default: "KoneCareContract_CI"
+      #  cx_pass:
+      #    type: string
+      #    default: z5lcQ1rXYaF95H6BMq\@\(
+    # environment:
+    #   cx_user: cx_user
+    #   cx_password: cx_password
+    steps:
+      - run: pip3 install requests
+      - checkout
+      - run: 
+          command: |
+           
+           echo "This is Sujata Testing here"
+           echo "import os" >>test.py
+           echo "print(os.environ)" >>test.py
+           python3 test.py
+
+           
+              
+         
+      #     cx_pass=${cx_password}
+      # - run: pwd
+      # - run: echo $cx_user
+      # - run: ls -lart .circleci/scripts/CheckmarxScanner.py
+      # - run: python3 .circleci/scripts/CheckmarxScanner.py --username=KoneCareContract_CI --password=z5lcQ1rXYaF95H6BMq\@\( --url=<< parameters.cx_url >> --projectId=<< parameters.cx_project_ID >> --source=.
+
+  
 
 workflows:
   artifact-test:
@@ -123,6 +164,16 @@ workflows:
     jobs:
       - maven-test:
           type: approval
-      - push-image
-          
+      - push-image: 
+          requires:
+            - maven-test
+
+  checkmarx:
+    jobs:
+    - checkmarx_approval:
+       type: approval
+    - chckmarx-testing: 
+        requires:
+          - checkmarx_approval
+        
     
